@@ -1,16 +1,22 @@
 import { fileURLToPath, URL } from "node:url";
-
+import UnoCSS from "unocss/vite";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import vueDevTools from "vite-plugin-vue-devtools";
+import AutoImport from "unplugin-auto-import/vite";
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueDevTools()],
+  plugins: [
+    vue(),
+    UnoCSS(),
+    AutoImport({
+      imports: ["vue", "vue-router"],
+    }),
+  ],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-  base: "/quran-2/",
+  base: "/quran-2",
 });
